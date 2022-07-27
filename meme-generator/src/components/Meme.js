@@ -11,7 +11,8 @@ export default function Meme() {
   const [allMemeImages, setAllMemeImages] = useState(data);
 
 
-  function generateRandomMeme() {
+  function generateRandomMeme(ev) {
+    ev.preventDefault()
     const randomNum = Math.floor(Math.random() * allMemeImages.data.memes.length);
     const url = allMemeImages.data.memes[randomNum].url;
     setMeme((prevMeme) => ({
@@ -24,14 +25,14 @@ export default function Meme() {
 
   return (
     <>
-      <div className='meme-form' >
+      <form className='meme-form' >
         <input type='text' className='form--input' placeholder='Top-text' />
         <input type='text' className='form--input' placeholder='Bottom-text' />
         <button
           className='form--button'
-          onClick={generateRandomMeme}
+          onClick={(ev) => { generateRandomMeme(ev) }}
         >Get a new meme image 🖼</button>
-      </div>
+      </form>
       <div className='img-container'>
         <img className='meme-img' src={meme.randomImage} alt='meme' />
       </div>
